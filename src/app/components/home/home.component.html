@@ -1,0 +1,133 @@
+<section id="home-slider">
+    <div class="container">
+        <div class="main-slider">
+            <div class="slide-text">
+                <h1>Informez Vous Sur Le Monde Archéologique</h1>
+                <p>Nous mettons à votre disposition nos découvertes, publications et
+                    chantiers de fouille enfin de vous faire vivre et découvrir le
+                    monde de l'archéologie.</p>
+                <a class="btn btn-common" data-toggle="modal" data-target="#modalConnexion">Connectez-vous</a>
+            </div>
+            <img src="../../../assets/images/home/pngegg.png" class="img-responsive slider-house" alt="slider image">
+        </div>
+    </div>
+</section>
+<!--/#home-slider-->
+
+<section style="margin: 60px 0px;">
+    <!-- <div class="vertical-center"> -->
+         <div class="container">
+            <div class="row">
+                <div class="action count">
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h1>5</h1>   
+                        <h2 class="text-uppercase second-bloc">Découvertes</h2>
+                    </div>
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h1>3</h1>   
+                        <h2 class="text-uppercase second-bloc">Publications</h2>
+                    </div>
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h1>3</h1> 
+                        <h2 class="text-uppercase second-bloc">Partenaires</h2>
+                    </div>
+                    <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <h1>5</h1> 
+                        <h2 class="text-uppercase second-bloc">Projects aux Total</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+</section>
+<!--/#services-->
+
+<section id="action" class="responsive">
+    <div class="vertical-center">
+         <div class="container">
+            <div class="row">
+                <div class="action take-tour">
+                    <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <h1 class="title">A la une</h1>
+                        <p>Voyagez &amp; découvrez le monde archéologique.</p>
+                    </div>
+                    <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <div class="tour-button">
+                            <!-- <a href="#" class="btn btn-common">TAKE THE TOUR</a> -->
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#action-->
+
+<section id="features">
+    <div class="container">
+        <div class="row">
+            <div class="single-features" *ngFor="let post of posts; let i=index">
+                <div *ngIf="(i+1)%2 !=0"
+                    class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <img src="../../../assets/images/posts/{{post.image}}" class="img-responsive img-postsHome" 
+                    alt="">
+                </div>
+                <div *ngIf="(i+1)%2 !=0" class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" 
+                data-wow-delay="300ms">
+                    <h2>{{post.titre}}</h2>
+                    <p>{{post.description}}</p>
+                    <a routerLink="/details/{{post.type}}/{{post.id}}" class="read-more">Voir plus</a>
+                </div>
+
+                <!-- Right pots -->
+                <div *ngIf="(i+1)%2 ==0" class="col-sm-6 col-sm-offset-1 align-right wow fadeInRight" 
+                data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>{{post.titre}}</h2>
+                    <p>{{post.description}}</p>
+                    <a routerLink="/details/{{post.type}}/{{post.id}}" class="read-more">Voir plus</a>
+                </div>
+                <div *ngIf="(i+1)%2 ==0" class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" 
+                data-wow-delay="300ms">
+                    <img src="../../../assets/images/posts/{{post.image}}" class="img-responsive img-postsHome" 
+                    alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ <!--/#features-->
+
+<section id="clients">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <p><img src="../../../assets/images/home/clients.png" class="img-responsive" alt=""></p>
+                    <h1 class="title">Nos partenaires</h1>
+                    <p> Ils nous font confiance.</p>
+                </div>
+                <div class="clients-logo text-center wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="https://www.institut-g4.fr/" target="_blank">
+                            <img src="../../../assets/images/home/Institut-G4.png" 
+                            class="img-responsive" alt="">
+                        </a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="https://www.inrap.fr/" target="_blank">
+                            <img src="../../../assets/images/footer/inrap-logo.png"
+                             class="img-responsive img-inrap" alt="">
+                        </a>
+                    </div>
+                     <div class="col-xs-3 col-sm-2">
+                        <a href="https://musee-archeologienationale.fr/" target="_blank">
+                            <img src="../../../assets/images/home/musée_national.jpg" class="img-responsive" alt="">
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+<!--/#clients-->

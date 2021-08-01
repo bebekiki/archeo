@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBaseUrl:  'http://9f17102b7587.ngrok.io/CODES/archeo/server/index.php',
+  stripe_key : 'pk_test_51In0nlDRRZ3qGhMtMS0GT6Z15XNnq15AzUk8DqsjVA19pdLANNHMmctuOd4bdf2miZxLBv851MUWo7gG6o9uhPg400CnjhMTeo',
+  // apiBaseUrl:'http://localhost/CODES/archeo/server/index.php'
 };
 
 /*

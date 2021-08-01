@@ -1,0 +1,242 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <!-- <img
+      width="40"
+      alt="Angular Logo"
+      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    /> -->
+    <!-- <img src="../assets/images/logo.png" alt="logo" id="logo"> -->
+    <span>Gestion des posts</span>
+  
+    <div class="spacer"></div>
+    <div>
+      <a data-toggle="modal" data-target="#modalAjoutPost" style="cursor:pointer">
+        <i class="fa fa-plus"></i>  Ajouter un post
+      </a>
+    </div>
+  
+</div>
+<br/><br/><br/><br/>
+
+<div class="container">
+
+    <div class="alert alert-success alert-dismissible" *ngIf="messageSuccess">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{messageSuccess}}</strong>.
+    </div>
+
+    <div class="alert alert-danger alert-dismissible" *ngIf="messageError">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>{{messageError}}</strong>.
+    </div>
+
+    <div [ngStyle]="{'float':'right'}">
+        <select class="form-control" id="filter" name="filter" ngModel 
+            (change)='getAllPosts($event.target.value)'
+            [ngStyle]="{'width':'100%', 'margin-bottom':'5px'}">
+            <option value="all">Tous</option>
+            <option value="decouvertes">Découvertes</option>
+            <option value="publications">Publications</option>
+        </select>
+    </div>
+    <table class="table table-bordered">
+    <thead>
+      <tr class="title-table">
+        <th scope="col">N°</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Auteur</th>
+        <th scope="col">Description</th>
+        <th scope="col">Tag</th>
+        <th scope="col">Date</th>
+        <th scope="col">type</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts; let index = index;">
+        <th scope="row">{{index+1}}</th>
+        <td>{{post.titre}}</td>
+        <td>{{post.auteur}}</td>
+        <td>{{post.description}}</td>
+        <td>{{post.tag}}</td>
+        <td>{{post.date}}</td>
+        <td>{{post.type}}</td>
+        <td>
+            <button type="button" class="btn btn-success" 
+                data-toggle="modal" data-target="#modalEditPost" (click)="getCurrentPost(post)">
+                Editer
+            </button>
+            <button type="button" class="btn btn-danger" (click)="deletePost(post.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="blog-pagination">
+    <ul class="pagination">
+      <li><a >left</a></li>
+      <li [ngClass]="{'active': paginateId === pagination}" *ngFor="let pagination of paginations">
+          <a style="cursor: pointer;" (click)="paginatePosts(pagination*4,pagination)">{{pagination}}</a>
+        </li>
+      <li><a >right</a></li>
+    </ul>
+</div>
+
+</div>
+
+
+
+<!-- Modal d'ajout de post -->
+<div class="modal fade" id="modalAjoutPost" tabindex="-1" role="dialog" aria-labelledby="modalAjoutPost" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background: #D89B4E;color: white;border-radius: 0px;">
+            <div class="modal-body">
+                <div class="text-center">
+                    <h2 style="color:white; font-weight: bolder;">AJOUTEZ UN NOUVEAU POST</h2>
+                    <label>Entrez les informations pour ajouter un post !!!</label><br>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-10">
+                        <form class="padding" #createPostForm="ngForm" (ngSubmit)="createPost(createPostForm)">
+                            <div class="form-group row">
+                                <label for="titre" class="col-sm-4 col-form-label">Titre : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="titre" name="titre" autocomplete="off" ngModel>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="auteur" class="col-sm-4 col-form-label">Auteur : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="auteur" name="auteur" autocomplete="off" ngModel>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tag" class="col-sm-4 col-form-label">Tag : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="tag" name="tag" placeholder="ossements,bijoux,pierres" ngModel>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="type" class="col-sm-4 col-form-label">Type : </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="type" name="type" ngModel>
+                                        <option value="découvertes">Découvertes</option>
+                                        <option value="publications">Publications</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="id_categories" class="col-sm-4 col-form-label">Catégories : </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="id_categories" name="id_categories" ngModel>
+                                        <option *ngFor="let categorie of categories" [ngValue]="categorie.id">
+                                            {{categorie.libelle}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-4 col-form-label">Description : </label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="description" id="description" rows="5" cols="33" ngModel></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="image" class="col-sm-4 col-form-label">Image : </label>
+                                <div class="col-sm-8">
+                                    <input type="file" accept="image/*" class="form-control" id="image" name="image" 
+                                    (change)="fileEvent($event)" ngModel>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="enregistrer" class="col-sm-4 col-form-label"></label>
+                                <div class="col-sm-8">
+                                    <input type="submit" name="submit" class="btn CreationPost" value="CREER">    
+                                    <button type="button" class="btn" data-dismiss="modal" id="closeModal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal pour éditer un post -->
+<div class="modal fade" id="modalEditPost" tabindex="-1" role="dialog" aria-labelledby="modalEditPost" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background: #D89B4E;color: white;border-radius: 0px;">
+            <div class="modal-body">
+                <div class="text-center">
+                    <h2 style="color:white; font-weight: bolder;">MODIFIER UN POST</h2>
+                    <label>Entrez les informations de modification du post !!!</label><br>
+                    <!-- <label class="text-danger font-weight-bold">{{message}}</label> -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-10">
+                        <form class="padding" #editPostForm="ngForm" (ngSubmit)="editPost(editPostForm)">
+                            <div class="form-group row">
+                                <label for="titre" class="col-sm-4 col-form-label">Titre : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="titre" name="titre" autocomplete="off" [(ngModel)]="currentPost.titre">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="auteur" class="col-sm-4 col-form-label">Auteur : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="auteur" name="auteur" autocomplete="off" [(ngModel)]="currentPost.auteur">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tag" class="col-sm-4 col-form-label">Tag : </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="tag" name="tag" placeholder="ossements,bijoux,pierres" [(ngModel)]="currentPost.tag">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="type" class="col-sm-4 col-form-label">Type : </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="type" name="type" ngModel>
+                                        <option value="découvertes">Découvertes</option>
+                                        <option value="publications">Publications</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="categories" class="col-sm-4 col-form-label">Catégories : </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="categories" name="categories" ngModel>
+                                        <option *ngFor="let categorie of categories" value={{categorie.id}}>
+                                            {{categorie.libelle}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="description" class="col-sm-4 col-form-label">Description : </label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="description" id="description" rows="5" cols="33" [(ngModel)]="currentPost.description"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="enregistrer" class="col-sm-4 col-form-label"></label>
+                                <div class="col-sm-8">
+                                    <input type="submit" name="submit" class="btn CreationPost" value="MODIFIER">    
+                                    <button type="button" class="btn" data-dismiss="modal" id="closeModal" [hidden]=true>Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/style/bootstrap.min.css';
+@import './assets/style/font-awesome.min.css';
+@import './assets/style/animate.min.css';
+@import './assets/style/lightbox.css';
+@import './assets/style/main.css';
+@import './assets/style/responsive.css';

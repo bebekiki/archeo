@@ -1,0 +1,76 @@
+
+    <section id="page-breadcrumb">
+        <div class="vertical-center sun">
+             <div class="container">
+                <div class="row">
+                    <div class="action">
+                        <div class="col-sm-12">
+                            <h1 class="title">Publications</h1>
+                            <p>Toutes l'actualités concernant l'association.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </section>
+    <!--/#action-->
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <ul class="portfolio-filter text-center">
+                    <li>
+                        <a class="btn btn-default" [ngClass]="{'active': selectedItemId === 0}" style="cursor: pointer;" (click)="getAllPosts(0)">
+                            All
+                        </a>
+                    </li>
+                    <li *ngFor="let categorie of categories">
+                        <a class="btn btn-default" [ngClass]="{'active': selectedItemId === categorie.id}" style="cursor: pointer;" (click)="getAllPosts(categorie.id)">
+                            {{categorie.libelle}}
+                        </a>
+                    </li>
+                </ul><!--/#portfolio-filter-->
+                
+                <div class="portfolio-items">
+                    <div class="col-sm-6 portfolio-item" *ngFor="let post of posts">
+                        <div class="portfolio-wrapper">
+                            <div class="single-blog">
+                                <div class="portfolio-thumb">
+                                    <img src="../../../assets/images/posts/{{post.image}}" class="img-responsive img-publications" alt="">
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="#"><small>{{post.date[0]}}<br>{{post.date[1]}}<br>{{post.date[2]}}</small></a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="post-content overflow single-blog">
+                                <h3 class="post-title bold">{{post.titre | slice: 0:33}}</h3>
+                                <h3 class="post-author"><a>Posté par {{post.auteur}}</a></h3>
+                                <p>{{post.description | slice: 0:240}}</p>
+                                <a routerLink="/details/Publications/{{post.id}}" class="read-more">Voir plus</a>
+                                <div class="post-bottom overflow">
+                                    <ul class="nav nav-justified post-nav">
+                                        <li *ngFor="let tag of post.tag">
+                                            <a href="#"><i class="fa fa-tag"></i>{{tag}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="portfolio-pagination">
+                <ul class="pagination">
+                    <li>
+                        <a style="cursor: pointer;">left</a>
+                    </li>
+                    <li [ngClass]="{'active': paginateId === pagination}" *ngFor="let pagination of paginations">
+                        <a style="cursor: pointer;" (click)="paginatePosts(pagination*4,pagination)">{{pagination}}</a>
+                      </li>
+                    <li><a style="cursor: pointer;">right</a></li>
+                  </ul>
+            </div>
+        </div>
+    </section>
+    <!--/#portfolio-->

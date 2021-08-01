@@ -1,0 +1,85 @@
+<section id="page-breadcrumb">
+    <div class="vertical-center sun">
+         <div class="container">
+            <div class="row">
+                <div class="action">
+                    <div class="col-sm-12">
+                        <h1 class="title">Formulaire de collecte de dons</h1>
+                        <p>Merci de faire une donation en ligne pour aider notre assocition dans leurs recherches.</p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#page-breadcrumb-->
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-8">
+                <form class="padding" #formDon="ngForm" (ngSubmit)="payer(formDon)">
+                    
+                    <div class="alert alert-success alert-dismissible" *ngIf="msgSuccess">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{msgSuccess}}</strong>.
+                    </div>
+        
+                    <div class="alert alert-danger alert-dismissible" *ngIf="msgError">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{msgError}}</strong>.
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="nomDonateur" class="col-sm-2 col-form-label">Nom donateur</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" class="form-control" id="nomDonateur" ngModel>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="emailDonateur" class="col-sm-2 col-form-label">E-mail</label>
+                        <div class="col-sm-10">
+                            <input type="email" name="email" class="form-control" id="emailDonateur" ngModel>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="adresseDonateur" class="col-sm-2 col-form-label">Adresse</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="adress" class="form-control" id="adresseDonateur" ngModel>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="telDonateur" class="col-sm-2 col-form-label">Téléphone</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="number" class="form-control" id="telDonateur" ngModel>
+                        </div>
+                    </div>
+                    <div class="form-group row" [hidden]=true>
+                        <label for="montantDonateur" class="col-sm-2 col-form-label">Montant</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="price" class="form-control" id="montantDonateur" ngModel>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="commentaireDonateur" class="col-sm-2 col-form-label">Commentaire</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="commentaire" id="commentaireDonateur" rows="5" cols="33" ngModel>
+                        </textarea>    
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="faireDon" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <input type="submit" name="submit" class="btn btn-submit" value="Faire un don">    
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-2"></div>
+        </div>
+    </div>  
+</section>
+<!--/#services-->

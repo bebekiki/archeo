@@ -1,0 +1,32 @@
+.img-postsHome{
+    height: 220px;
+    width: 400px;
+}
+.title{
+    font-weight: normal;
+}
+.slider-house{
+    height: inherit;
+}
+.img-inrap{
+    position: relative;
+    top: -25px;
+}
+.second-bloc{
+    font-size: 20px !important;
+    font-weight: bolder;
+}
+
+
+@media only screen and (max-width: 780px) {
+    .slider-house{
+        height: initial;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .img-inrap{
+        position: relative;
+        top: -12px;
+    }
+}
